@@ -1,5 +1,6 @@
-import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 // Tu configuración de Firebase (ve a tu proyecto Firebase > Project Settings > General)
 const firebaseConfig = {
@@ -8,7 +9,7 @@ const firebaseConfig = {
   projectId: "savemoney-5b8ec",
   storageBucket: "savemoney-5b8ec.firebasestorage.app",
   messagingSenderId: "803083686419",
-  appId: "1:803083686419:web:e4330d450c80cc783d25e6"
+  appId: "1:803083686419:web:e4330d450c80cc783d25e6",
 };
 
 // Inicializar Firebase
@@ -16,5 +17,4 @@ const app = initializeApp(firebaseConfig);
 
 // Inicializar Firestore
 export const db = getFirestore(app);
-
-
+export const auth = getAuth(app);
