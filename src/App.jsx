@@ -1,5 +1,6 @@
 // App.jsx
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import AhorroCasaApp from "./components/AhorroCasaApp";
 import { Login } from "./components/Login";
 import { auth } from "./firebase/config";
@@ -20,7 +21,7 @@ function App() {
   const cerrarSesion = async () => {
     try {
       await signOut(auth);
-      setUser(null); // 🔹 limpia el estado
+      setUser(null);
     } catch (err) {
       console.error("Error al cerrar sesión", err);
     }
@@ -34,10 +35,34 @@ function App() {
     );
   }
 
-  return user ? (
-    <AhorroCasaApp cerrarSesion={cerrarSesion} />
-  ) : (
-    <Login onLogin={setUser} />
+  return (
+    <Router>
+      <Routes>
+        {/* Ruta pública */}
+        <Route
+          path="/login"
+          element={!user ? <Login onLogin={setUser} /> : <Navigate to="/dashboard" />}
+        />
+
+        {/* Ruta privada */}
+        <Route
+          path="/dashboard"
+          element={user ? <AhorroCasaApp cerrarSesion={cerrarSesion} /> : <Navigate to="/login" />}
+        />
+
+        {/* Redirección por defecto */}
+        <Route
+          path="/"
+          element={user ? <Navigate to="/dashboard" /> : <Navigate to="/login" />}
+        />
+
+        {/* Redirección para cualquier ruta desconocida */}
+        <Route
+          path="*"
+          element={<Navigate to="/" />}
+        />
+      </Routes>
+    </Router>
   );
 }
 
