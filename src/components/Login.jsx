@@ -1,12 +1,12 @@
-// Login.jsx
 import React, { useState } from "react";
 import { auth } from "../firebase/config";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { PiggyBank } from "lucide-react"; // icono chulo de ahorro
+import { PiggyBank, Eye, EyeOff } from "lucide-react";
 
 export const Login = ({ onLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [mostrarPassword, setMostrarPassword] = useState(false);
   const [error, setError] = useState("");
 
   const handleLogin = async (e) => {
@@ -28,7 +28,6 @@ export const Login = ({ onLogin }) => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100">
       <div className="bg-white p-8 rounded-2xl shadow-xl w-96 text-center">
-        {/* Icono y título */}
         <div className="flex justify-center mb-4">
           <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-3 rounded-full shadow-lg">
             <PiggyBank className="w-10 h-10 text-white" />
@@ -54,13 +53,23 @@ export const Login = ({ onLogin }) => {
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
 
-          <input
-            type="password"
-            placeholder="Contraseña"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
+          {/* Input de contraseña con botón de ojo */}
+          <div className="relative">
+            <input
+              type={mostrarPassword ? "text" : "password"}
+              placeholder="Contraseña"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 pr-10"
+            />
+            <button
+              type="button"
+              onClick={() => setMostrarPassword(!mostrarPassword)}
+              className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+            >
+              {mostrarPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+            </button>
+          </div>
 
           <button
             type="submit"
@@ -75,7 +84,6 @@ export const Login = ({ onLogin }) => {
           </button>
         </form>
 
-        {/* Footer */}
         <p className="text-xs text-gray-400 mt-6">
           AhorroCasa © {new Date().getFullYear()}
         </p>
@@ -83,3 +91,4 @@ export const Login = ({ onLogin }) => {
     </div>
   );
 };
+
