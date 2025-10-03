@@ -45,7 +45,7 @@ export const NuevaAportacion = ({
           <PiggyBank className="w-5 h-5 text-indigo-600" /> Agregar aportación
         </h2>
 
-        <div className="flex gap-3">
+        <div className="flex flex-col gap-3">
           <select
             value={nuevaPersona}
             onChange={(e) => setNuevaPersona(e.target.value)}

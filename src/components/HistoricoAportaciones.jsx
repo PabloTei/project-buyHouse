@@ -108,7 +108,7 @@ export const HistoricoAportaciones = ({
 
       {popupVisible && (
         <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-lg w-96 p-6">
+          <div className="bg-white rounded-lg shadow-lg p-6">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-bold">Filtrar movimientos</h3>
               <button
