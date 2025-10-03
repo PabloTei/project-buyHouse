@@ -108,7 +108,7 @@ export const HistoricoAportaciones = ({
 
       {popupVisible && (
         <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-lg p-6">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-96">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-bold">Filtrar movimientos</h3>
               <button
@@ -141,7 +141,7 @@ export const HistoricoAportaciones = ({
                 <option value="retirada">Retiradas</option>
               </select>
 
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2">
                 <input
                   type="date"
                   value={tempFechaInicio}
@@ -156,7 +156,7 @@ export const HistoricoAportaciones = ({
                 />
               </div>
 
-              <div className="flex gap-2">
+              <div className="flex flex-col gap-2">
                 <input
                   type="number"
                   placeholder="Cantidad min"
