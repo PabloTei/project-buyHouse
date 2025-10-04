@@ -35,34 +35,44 @@ export const AportacionesPorPersona = ({
       </h2>
 
       <div className="space-y-3">
-        {["Gaby", "Pablo"].map((persona) => {
-          const total = calcularTotal(persona);
-          const color = persona === "Gaby" ? "pink" : "blue";
-          return (
-            <div
-              key={persona}
-              className={`flex justify-between items-center p-4 bg-${color}-50 rounded-lg border-2 border-${color}-200`}
-            >
-              <div className="flex items-center gap-3">
-                <div
-                  className={`w-10 h-10 rounded-full bg-${color}-500 flex items-center justify-center text-white font-bold`}
-                >
-                  {persona[0]}
-                </div>
-                <span className="font-semibold text-gray-800">{persona}</span>
-              </div>
-              <span
-                className={`text-lg font-bold ${
-                  total >= 0 ? `text-${color}-600` : "text-red-600"
-                }`}
-              >
-                {total >= 0 ? "" : "-"}
-                {Math.abs(total).toLocaleString("es-ES")} €
-              </span>
-            </div>
-          );
-        })}
-      </div>
+         {["Gaby", "Pablo"].map((persona) => {
+           const total = calcularTotal(persona);
+           const isGaby = persona === "Gaby";
+           return (
+             <div
+               key={persona}
+               className={`flex justify-between items-center p-4 rounded-lg border-2 ${
+                 isGaby
+                   ? "bg-pink-50 border-pink-200"
+                   : "bg-blue-50 border-blue-200"
+               }`}
+             >
+               <div className="flex items-center gap-3">
+                 <div
+                   className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold ${
+                     isGaby ? "bg-pink-500" : "bg-blue-500"
+                   }`}
+                 >
+                   {persona[0]}
+                 </div>
+                 <span className="font-semibold text-gray-800">{persona}</span>
+               </div>
+               <span
+                 className={`text-lg font-bold ${
+                   total >= 0
+                     ? isGaby
+                       ? "text-pink-600"
+                       : "text-blue-600"
+                     : "text-red-600"
+                 }`}
+               >
+                 {total >= 0 ? "" : "-"}
+                 {Math.abs(total).toLocaleString("es-ES")} €
+               </span>
+             </div>
+           );
+         })}
+       </div>
 
       {(totalGaby > 0 || totalPablo > 0) && (
         <div className="mt-4">
